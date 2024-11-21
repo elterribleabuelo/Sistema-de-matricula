@@ -1,9 +1,11 @@
 package com.mitocode.enrollmentstudent.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/cursos")
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("/cursos")
 public class CursoController {
 }

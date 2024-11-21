@@ -1,5 +1,6 @@
 package com.mitocode.enrollmentstudent.service.impl;
 
+import com.mitocode.enrollmentstudent.model.Curso;
 import com.mitocode.enrollmentstudent.repo.ICursoRepo;
 import com.mitocode.enrollmentstudent.repo.IGenericRepo;
 import com.mitocode.enrollmentstudent.service.ICursoService;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 
 @Service
-public class CursoServiceImpl extends CRUDImpl implements ICursoService {
+public class CursoServiceImpl extends CRUDImpl<Curso,Integer> implements ICursoService {
 
     private final ICursoRepo repo;
 

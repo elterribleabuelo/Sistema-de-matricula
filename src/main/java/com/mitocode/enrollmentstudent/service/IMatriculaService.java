@@ -1,4 +1,6 @@
 package com.mitocode.enrollmentstudent.service;
 
-public interface IMatriculaService {
+import com.mitocode.enrollmentstudent.model.Matricula;
+
+public interface IMatriculaService extends ICRUD<Matricula,Integer>{
 }
