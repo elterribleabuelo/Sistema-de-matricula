@@ -31,4 +31,9 @@ public class EstudianteServiceImpl extends CRUDImpl<Estudiante,Integer> implemen
                 .sorted(Comparator.comparing(Estudiante::getEdad).reversed())
                 .toList();
     }
+
+    @Override
+    public boolean existsEstudianteByDni(String dni) {
+        return repo.existsEstudianteByDni(dni);
+    }
 }
