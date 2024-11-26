@@ -1,9 +1,7 @@
 package com.mitocode.enrollmentstudent.controller;
 
 import com.mitocode.enrollmentstudent.dto.CursoDTO;
-import com.mitocode.enrollmentstudent.dto.EstudianteDTO;
 import com.mitocode.enrollmentstudent.model.Curso;
-import com.mitocode.enrollmentstudent.model.Estudiante;
 import com.mitocode.enrollmentstudent.service.ICursoService;
 import com.mitocode.enrollmentstudent.util.MapperUtil;
 import jakarta.validation.Valid;

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +31,12 @@ public class MatriculaController {
     public ResponseEntity<List<MatriculaDTO>> findAll() throws Exception {
         List<Matricula> obj = service.findAll();
         return new ResponseEntity<>(mapperUtil.mapList(obj,MatriculaDTO.class), HttpStatus.OK);
+    }
+
+    @GetMapping("studentsByCourse")
+    public ResponseEntity<Map<String, List<String>>> getStudentsByCourse() throws Exception {
+        Map<String, List<String>> obj =  service.getStudentsByCourse();
+        return ResponseEntity.ok(obj);
     }
 
 }

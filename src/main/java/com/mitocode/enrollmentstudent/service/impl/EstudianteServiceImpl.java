@@ -7,6 +7,9 @@ import com.mitocode.enrollmentstudent.service.IEstudianteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.List;
+
 @RequiredArgsConstructor
 
 @Service
@@ -16,6 +19,16 @@ public class EstudianteServiceImpl extends CRUDImpl<Estudiante,Integer> implemen
 
     @Override
     protected IGenericRepo getRepo() {
+
         return repo;
+    }
+
+    @Override
+    public List<Estudiante> orderByAge() {
+        List<Estudiante> list = repo.findAll();
+        return  list
+                .stream()
+                .sorted(Comparator.comparing(Estudiante::getEdad).reversed())
+                .toList();
     }
 }

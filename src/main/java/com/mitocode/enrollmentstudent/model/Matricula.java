@@ -29,7 +29,7 @@ public class Matricula {
     private Estudiante estudiante;
 
     @OneToMany(mappedBy = "matricula",cascade = CascadeType.ALL)
-    private List<DetalleMatricula> detalle;
+    private List<DetalleMatricula> detalleMatricula;
 
     @Column(nullable = false)
     private boolean estado;

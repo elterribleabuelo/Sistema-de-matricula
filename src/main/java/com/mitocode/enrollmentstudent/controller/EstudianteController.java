@@ -6,7 +6,6 @@ import com.mitocode.enrollmentstudent.service.IEstudianteService;
 import com.mitocode.enrollmentstudent.util.MapperUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +37,12 @@ public class EstudianteController {
     public ResponseEntity<EstudianteDTO> findById(@PathVariable int id) throws Exception {
         Estudiante obj = service.findById(id);
         return new ResponseEntity<>(mapperUtil.map(obj, EstudianteDTO.class), HttpStatus.OK);
+    }
+
+    @GetMapping("/orderbyedad")
+    public ResponseEntity<List<EstudianteDTO>> orderByEdad() throws Exception {
+        List<Estudiante> obj = service.orderByAge();
+        return new ResponseEntity<>(mapperUtil.mapList(obj,EstudianteDTO.class), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
