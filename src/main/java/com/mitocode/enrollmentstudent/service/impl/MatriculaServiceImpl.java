@@ -35,7 +35,7 @@ public class MatriculaServiceImpl extends CRUDImpl<Matricula,Integer> implements
 
         Stream<DetalleMatricula> streamDetalleMatricula = lsStream.flatMap(Collection::stream);
 
-        Stream<AuxDTO> streamAuxDTO = streamDetalleMatricula.map(e-> new AuxDTO(e.getCurso().getNombre(),e.getMatricula().getEstudiante().getNombres()));
+        Stream<AuxDTO> streamAuxDTO = streamDetalleMatricula.map(e-> new AuxDTO(e.getCurso().getNombre(),e.getMatricula().getEstudiante().getNombres() + " " + e.getMatricula().getEstudiante().getApellidos()));
 
         List<AuxDTO> auxDTOList = streamAuxDTO.toList();
 
