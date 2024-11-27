@@ -1,5 +1,6 @@
 package com.mitocode.enrollmentstudent.dto;
 
+import com.mitocode.enrollmentstudent.validator.UniqueNameCourse;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ public class CursoDTO {
     private Integer idCurso;
 
     @NotNull
+    @UniqueNameCourse
     private String nombre;
 
     @NotNull

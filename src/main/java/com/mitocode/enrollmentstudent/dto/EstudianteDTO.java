@@ -23,7 +23,7 @@ public class EstudianteDTO {
 
     @NotNull
     @UniqueDni
-    @Pattern(regexp = "[0-9]+")
+    @Pattern(regexp = "[0-9]+",message = "Debe contener solo números")
     private String dni;
 
     @NotNull

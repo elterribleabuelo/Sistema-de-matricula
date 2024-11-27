@@ -15,7 +15,6 @@ public class UniqueDniValidator implements ConstraintValidator<UniqueDni, String
 
     @Override
     public boolean isValid(String dni, ConstraintValidatorContext constraintValidatorContext) {
-        System.out.println("dni:" + dni);
         return !repo.existsEstudianteByDni(dni);
     }
 }
