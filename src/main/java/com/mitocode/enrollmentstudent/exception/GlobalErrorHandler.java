@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 public class GlobalErrorHandler {
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<CustomErrorResponse> handleDefaultException(Exception ex, WebRequest request) {
+    public ResponseEntity<GenericResponseDTO<CustomErrorResponse>> handleDefaultException(Exception ex, WebRequest request) {
         CustomErrorResponse errorResponse = new CustomErrorResponse(LocalDateTime.now(),ex.getMessage(), request.getDescription(false));
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new GenericResponseDTO<>(500,"internal-server-error",Arrays.asList(errorResponse)), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(ModelNotFoundException.class)
@@ -31,9 +31,9 @@ public class GlobalErrorHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<CustomErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex , WebRequest request){
+    public ResponseEntity<GenericResponseDTO<CustomErrorResponse>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex , WebRequest request){
         String message = ex.getBindingResult().getFieldErrors().stream().map(error->error.getField() + ": " + error.getDefaultMessage()).collect(Collectors.joining(","));
         CustomErrorResponse errorResponse = new CustomErrorResponse(LocalDateTime.now(),message, request.getDescription(false));
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new GenericResponseDTO<>(400,"bad-request",Arrays.asList(errorResponse)),HttpStatus.BAD_REQUEST);
     }
 }

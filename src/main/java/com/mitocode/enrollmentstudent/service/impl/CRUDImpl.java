@@ -1,5 +1,6 @@
 package com.mitocode.enrollmentstudent.service.impl;
 
+import com.mitocode.enrollmentstudent.exception.ModelNotFoundException;
 import com.mitocode.enrollmentstudent.repo.IGenericRepo;
 import com.mitocode.enrollmentstudent.service.ICRUD;
 
@@ -34,7 +35,7 @@ public abstract class CRUDImpl<T,ID> implements ICRUD<T,ID> {
 
     @Override
     public T findById(ID id) throws Exception {
-        return getRepo().findById(id).orElseThrow(()->new Exception("ID NOT FOUND" +  id));
+        return getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND" +  id));
     }
 
     @Override
