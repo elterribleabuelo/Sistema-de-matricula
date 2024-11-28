@@ -39,7 +39,7 @@ public class EstudianteController {
         return new ResponseEntity<>(mapperUtil.map(obj, EstudianteDTO.class), HttpStatus.OK);
     }
 
-    @GetMapping("/orderbyedad")
+    @GetMapping("/ordenadoPorEdad")
     public ResponseEntity<List<EstudianteDTO>> orderByEdad() throws Exception {
         List<Estudiante> obj = service.orderByAge();
         return new ResponseEntity<>(mapperUtil.mapList(obj,EstudianteDTO.class), HttpStatus.OK);

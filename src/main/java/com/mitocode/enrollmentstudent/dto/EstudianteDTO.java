@@ -1,6 +1,7 @@
 package com.mitocode.enrollmentstudent.dto;
 
 import com.mitocode.enrollmentstudent.validator.UniqueDni;
+import com.mitocode.enrollmentstudent.validator.groups.OnCreate;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -22,7 +23,7 @@ public class EstudianteDTO {
     private String apellidos;
 
     @NotNull
-    @UniqueDni
+    @UniqueDni(groups = OnCreate.class)
     @Pattern(regexp = "[0-9]+",message = "Debe contener solo números")
     private String dni;
 

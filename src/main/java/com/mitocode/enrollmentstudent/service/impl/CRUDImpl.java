@@ -3,6 +3,8 @@ package com.mitocode.enrollmentstudent.service.impl;
 import com.mitocode.enrollmentstudent.exception.ModelNotFoundException;
 import com.mitocode.enrollmentstudent.repo.IGenericRepo;
 import com.mitocode.enrollmentstudent.service.ICRUD;
+import com.mitocode.enrollmentstudent.validator.groups.OnCreate;
+import org.springframework.validation.annotation.Validated;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -12,7 +14,7 @@ public abstract class CRUDImpl<T,ID> implements ICRUD<T,ID> {
     protected abstract IGenericRepo<T,ID> getRepo();
 
     @Override
-    public T save(T t) throws Exception {
+    public T save(@Validated(OnCreate.class) T t) throws Exception {
         return getRepo().save(t);
     }
 
@@ -23,8 +25,6 @@ public abstract class CRUDImpl<T,ID> implements ICRUD<T,ID> {
         String methodName = "setId" + className;
         Method setIdMethod = clazz.getMethod(methodName, id.getClass());
         setIdMethod.invoke(t, id);
-
-        //getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND" +  id));
         return getRepo().save(t);
     }
 
@@ -40,7 +40,6 @@ public abstract class CRUDImpl<T,ID> implements ICRUD<T,ID> {
 
     @Override
     public void delete(ID id) throws Exception {
-        //getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND" +  id));
         getRepo().deleteById(id);
     }
 }

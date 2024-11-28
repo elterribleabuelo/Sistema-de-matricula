@@ -33,7 +33,7 @@ public class MatriculaController {
         return new ResponseEntity<>(mapperUtil.mapList(obj,MatriculaDTO.class), HttpStatus.OK);
     }
 
-    @GetMapping("studentsByCourse")
+    @GetMapping("estudiantesporcurso")
     public ResponseEntity<Map<String, List<String>>> getStudentsByCourse() throws Exception {
         Map<String, List<String>> obj =  service.getStudentsByCourse();
         return ResponseEntity.ok(obj);
