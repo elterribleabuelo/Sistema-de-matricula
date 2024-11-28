@@ -14,7 +14,7 @@ public abstract class CRUDImpl<T,ID> implements ICRUD<T,ID> {
     protected abstract IGenericRepo<T,ID> getRepo();
 
     @Override
-    public T save(@Validated(OnCreate.class) T t) throws Exception {
+    public T save(T t) throws Exception {
         return getRepo().save(t);
     }
 

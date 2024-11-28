@@ -4,10 +4,12 @@ import com.mitocode.enrollmentstudent.dto.CursoDTO;
 import com.mitocode.enrollmentstudent.model.Curso;
 import com.mitocode.enrollmentstudent.service.ICursoService;
 import com.mitocode.enrollmentstudent.util.MapperUtil;
+import com.mitocode.enrollmentstudent.validator.groups.OnCreate;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +23,7 @@ public class CursoController {
     private final MapperUtil mapperUtil;
 
     @PostMapping
-    public ResponseEntity<CursoDTO> save(@Valid @RequestBody CursoDTO dto) throws Exception {
+    public ResponseEntity<CursoDTO> save(@Validated(OnCreate.class) @Valid @RequestBody CursoDTO dto) throws Exception {
         Curso obj = service.save(mapperUtil.map(dto, Curso.class));
         return new ResponseEntity<>(mapperUtil.map(obj, CursoDTO.class), HttpStatus.CREATED);
     }

@@ -9,7 +9,7 @@ CRUD y listado de estudiantes en forma descendente usando la edad.
 
 - /estudiantes (GET,POST)
 - /estudiantes/{id} (GET,PUT,DELETE)
-- /estudiantes/orderbyedad (GET)
+- /estudiantes/ordenadoPorEdad (GET)
 
 **Cursos**
 
@@ -23,4 +23,4 @@ CRUD
 Creacion/lectura de matriculas y relación de cursos matriculados y sus estudiantes correspondientes.
 
 - /matricula (GET,POST)
-- /matricula/studentsByCourse(GET)
+- /matricula/estudiantesPorCurso (GET)

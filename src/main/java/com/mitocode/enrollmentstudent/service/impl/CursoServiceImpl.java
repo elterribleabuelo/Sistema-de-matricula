@@ -18,4 +18,9 @@ public class CursoServiceImpl extends CRUDImpl<Curso,Integer> implements ICursoS
     protected IGenericRepo getRepo() {
         return repo;
     }
+
+    @Override
+    public boolean existsCursoByNombre(String nombre) {
+        return repo.existsCursoByNombre(nombre);
+    }
 }
