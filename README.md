@@ -10,7 +10,7 @@ CRUD y listado de estudiantes en forma descendente usando la edad.
 - /estudiantes (GET,POST)
 - /estudiantes/{id} (GET,PUT,DELETE)
 
-### `Body request POST/PUT` flag
+### `Body request POST/PUT`
 
 ```Body request POST/PUT
 {
@@ -29,7 +29,7 @@ CRUD
 - /cursos(GET,POST)
 - /cursos/{id} (GET,PUT,DELETE)
 
-### `Body request POST/PUT` flag
+### `Body request POST/PUT`
 
 ```Body request POST/PUT
 {
@@ -45,7 +45,7 @@ Creacion/lectura de matriculas y relación de cursos matriculados y sus estudian
 
 - /matricula (GET,POST)
 
-### `Body request POST` flag
+### `Body request POST`
 
 ```Body request POST
 {
@@ -60,3 +60,62 @@ Creacion/lectura de matriculas y relación de cursos matriculados y sus estudian
 }
 ```
 - /matricula/estudiantesPorCurso (GET)
+
+<h2 style="color:red;">Control de excepciones</h2>
+
+- Registro de estudiante con DNI repetido
+
+### `Response`
+
+```Response
+{
+    "status": 400,
+    "message": "bad-request",
+    "data": [
+        {
+            "datetime": "2024-11-28T15:13:59.8746451",
+            "message": "dni: El DNI ya está registrado",
+            "path": "uri=/estudiantes"
+        }
+    ]
+}
+```
+
+- Registro de curso con nombre repetido
+
+### `Response`
+
+```Response
+{
+    "status": 400,
+    "message": "bad-request",
+    "data": [
+        {
+            "datetime": "2024-11-28T15:15:24.679776",
+            "message": "nombre: El nombre del Curso ya está registrado",
+            "path": "uri=/cursos"
+        }
+    ]
+}
+```
+
+- Actualizacion de estudiantes y cursos con ID no registrado
+
+### `Response`
+
+```Response
+{
+    "status": 400,
+    "message": "bad-request",
+    "data": [
+        {
+            "datetime": "2024-11-28T15:15:24.679776",
+            "message": "nombre: El nombre del Curso ya está registrado",
+            "path": "uri=/cursos"
+        }
+    ]
+}
+```
+
+
+

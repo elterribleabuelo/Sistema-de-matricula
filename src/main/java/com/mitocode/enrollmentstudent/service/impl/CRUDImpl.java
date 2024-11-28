@@ -25,6 +25,7 @@ public abstract class CRUDImpl<T,ID> implements ICRUD<T,ID> {
         String methodName = "setId" + className;
         Method setIdMethod = clazz.getMethod(methodName, id.getClass());
         setIdMethod.invoke(t, id);
+        getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND " +  id));
         return getRepo().save(t);
     }
 
@@ -35,11 +36,12 @@ public abstract class CRUDImpl<T,ID> implements ICRUD<T,ID> {
 
     @Override
     public T findById(ID id) throws Exception {
-        return getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND" +  id));
+        return getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND " +  id));
     }
 
     @Override
     public void delete(ID id) throws Exception {
+        getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND " +  id));
         getRepo().deleteById(id);
     }
 }
