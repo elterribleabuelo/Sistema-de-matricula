@@ -105,13 +105,13 @@ Creacion/lectura de matriculas y relación de cursos matriculados y sus estudian
 
 ```Response
 {
-    "status": 400,
-    "message": "bad-request",
+    "status": 404,
+    "message": "not-found",
     "data": [
         {
-            "datetime": "2024-11-28T15:15:24.679776",
-            "message": "nombre: El nombre del Curso ya está registrado",
-            "path": "uri=/cursos"
+            "datetime": "2024-11-28T17:47:17.781305",
+            "message": "ID NOT FOUND 10000",
+            "path": "uri=/estudiantes/10000"
         }
     ]
 }
