@@ -1,5 +1,6 @@
 package com.mitocode.enrollmentstudent.controller;
 
+import com.mitocode.enrollmentstudent.dto.GenericResponseDTO;
 import com.mitocode.enrollmentstudent.dto.MatriculaDTO;
 import com.mitocode.enrollmentstudent.model.Matricula;
 import com.mitocode.enrollmentstudent.service.IMatriculaService;
@@ -22,21 +23,23 @@ public class MatriculaController {
     private final MapperUtil mapperUtil;
 
     @PostMapping
-    public ResponseEntity<MatriculaDTO> save(@RequestBody MatriculaDTO dto) throws Exception {
+    public ResponseEntity<GenericResponseDTO> save(@RequestBody MatriculaDTO dto) throws Exception {
         Matricula obj = service.save(mapperUtil.map(dto, Matricula.class));
-        return new ResponseEntity<>(mapperUtil.map(obj, MatriculaDTO.class), HttpStatus.CREATED);
+        MatriculaDTO matriculaDTO = mapperUtil.map(obj, MatriculaDTO.class);
+        return new ResponseEntity<>(new GenericResponseDTO(201,"success",matriculaDTO), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<MatriculaDTO>> findAll() throws Exception {
+    public ResponseEntity<GenericResponseDTO> findAll() throws Exception {
         List<Matricula> obj = service.findAll();
-        return new ResponseEntity<>(mapperUtil.mapList(obj,MatriculaDTO.class), HttpStatus.OK);
+        List<MatriculaDTO> dto = mapperUtil.mapList(obj,MatriculaDTO.class);
+        return ResponseEntity.ok(new GenericResponseDTO(200,"success",dto));
     }
 
     @GetMapping("estudiantesPorCurso")
-    public ResponseEntity<Map<String, List<String>>> getStudentsByCourse() throws Exception {
+    public ResponseEntity<GenericResponseDTO> getStudentsByCourse() throws Exception {
         Map<String, List<String>> obj =  service.getStudentsByCourse();
-        return ResponseEntity.ok(obj);
+        return ResponseEntity.ok(new GenericResponseDTO(200,"success",obj));
     }
 
 }

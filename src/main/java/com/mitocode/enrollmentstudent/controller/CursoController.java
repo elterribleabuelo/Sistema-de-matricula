@@ -1,6 +1,7 @@
 package com.mitocode.enrollmentstudent.controller;
 
 import com.mitocode.enrollmentstudent.dto.CursoDTO;
+import com.mitocode.enrollmentstudent.dto.GenericResponseDTO;
 import com.mitocode.enrollmentstudent.model.Curso;
 import com.mitocode.enrollmentstudent.service.ICursoService;
 import com.mitocode.enrollmentstudent.util.MapperUtil;
@@ -23,31 +24,35 @@ public class CursoController {
     private final MapperUtil mapperUtil;
 
     @PostMapping
-    public ResponseEntity<CursoDTO> save(@Validated(OnCreate.class) @Valid @RequestBody CursoDTO dto) throws Exception {
+    public ResponseEntity<GenericResponseDTO> save(@Validated(OnCreate.class) @Valid @RequestBody CursoDTO dto) throws Exception {
         Curso obj = service.save(mapperUtil.map(dto, Curso.class));
-        return new ResponseEntity<>(mapperUtil.map(obj, CursoDTO.class), HttpStatus.CREATED);
+        CursoDTO cursoDTO = mapperUtil.map(obj, CursoDTO.class);
+        return new ResponseEntity<>(new GenericResponseDTO(201,"success",cursoDTO), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<CursoDTO>> findAll() throws Exception {
+    public ResponseEntity<GenericResponseDTO> findAll() throws Exception {
         List<Curso> obj = service.findAll();
-        return new ResponseEntity<>(mapperUtil.mapList(obj,CursoDTO.class), HttpStatus.OK);
+        List<CursoDTO> dto = mapperUtil.mapList(obj,CursoDTO.class);
+        return ResponseEntity.ok(new GenericResponseDTO(200,"success",dto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CursoDTO> findById(@PathVariable int id) throws Exception {
+    public ResponseEntity<GenericResponseDTO> findById(@PathVariable int id) throws Exception {
         Curso obj = service.findById(id);
-        return new ResponseEntity<>(mapperUtil.map(obj, CursoDTO.class), HttpStatus.OK);
+        CursoDTO cursoDTO = mapperUtil.map(obj, CursoDTO.class);
+        return ResponseEntity.ok(new GenericResponseDTO(200,"success",cursoDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CursoDTO> update(@Valid @RequestBody CursoDTO dto, @PathVariable int id) throws Exception {
+    public ResponseEntity<GenericResponseDTO> update(@Valid @RequestBody CursoDTO dto, @PathVariable int id) throws Exception {
         Curso obj = service.update(id, mapperUtil.map(dto, Curso.class));
-        return new ResponseEntity<>(mapperUtil.map(obj, CursoDTO.class),HttpStatus.OK);
+        CursoDTO cursoDTO = mapperUtil.map(obj, CursoDTO.class);
+        return ResponseEntity.ok(new GenericResponseDTO(200,"success",cursoDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable int id) throws Exception {
+    public ResponseEntity<GenericResponseDTO> delete(@PathVariable int id) throws Exception {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
